@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="jumbotron text-center">
+    <div class="container">
+        <h1>Let's create Fake CSV Data schema</h1>
+        <p>Check positions you would like to be present in your data</p>
+        <form method="POST" type="checkbox">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="btn btn-primary">Create Schema</button>
+    </div>
+</div>
+{% endblock %}

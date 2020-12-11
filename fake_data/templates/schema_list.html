@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="jumbotron text-center">
+    <div class="container">
+        <h1>Schemas Saved</h1>
+        <ul>
+            {% for schema in object_list %}
+            <li>{{ schema }}</li>
+            <a href="{% url 'generate-data' pk=schema.pk %}" type="submit" class="btn btn-primary">Generate Data</a>
+            {% empty %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
