@@ -18,7 +18,7 @@ AWS_DEFAULT_ACL = 'public-read'
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_S3_OBJECT_PARAMETRES = {'CacheControl': 'max-age=86400'}
 # A path prefix that will be prepended to all uploads
-AWS_LOCATION = '/static/'
+AWS_LOCATION = 'static/'
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}'
 # Django static file directory
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
