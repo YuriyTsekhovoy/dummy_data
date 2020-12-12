@@ -13,6 +13,7 @@ import environ
 import os
 from pathlib import Path
 from .storage_settings import *
+import django_heroku
 
 env = environ.Env()
 
@@ -130,3 +131,5 @@ LOGOUT_REDIRECT_URL = 'login'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+django_heroku.settings(locals())
