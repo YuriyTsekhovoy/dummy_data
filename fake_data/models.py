@@ -3,7 +3,7 @@ from django.db import models
 
 class FakeDataModel(models.Model):
     model = models.ForeignKey('SchemaDataModel', on_delete=models.CASCADE)
-    file = models.FileField(upload_to='files')
+    file = models.FileField(null=True, upload_to='files')
 
 
 class SchemaDataModel(models.Model):
