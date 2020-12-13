@@ -3,8 +3,7 @@ from django.db import models
 
 class FakeDataModel(models.Model):
     model = models.ForeignKey('SchemaDataModel', on_delete=models.CASCADE)
-    file_link = models.URLField(
-        max_length=200, db_index=True, unique=True, blank=True)
+    file = models.FileField(upload_to='files')
 
 
 class SchemaDataModel(models.Model):
