@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import environ
-import psycopg2
 import os
 from pathlib import Path
 from .storage_settings import *
@@ -137,5 +136,3 @@ django_heroku.settings(locals())
 
 
 DATABASE_URL = env('DATABASE_URL')
-
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
