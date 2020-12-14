@@ -21,4 +21,4 @@ AWS_S3_OBJECT_PARAMETRES = {'CacheControl': 'max-age=86400'}
 AWS_LOCATION = 'static/'
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}'
 # Django static file directory
-# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)

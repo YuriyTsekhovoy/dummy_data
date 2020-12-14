@@ -134,5 +134,5 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 django_heroku.settings(locals())
 
-
-DATABASE_URL = env('DATABASE_URL')
+DEFAULT_FILE_STORAGE = 'dummy_data_project.storage_backends.MediaStorage'
+# DATABASE_URL = env('DATABASE_URL')
