@@ -20,7 +20,7 @@ def fakedata_pre_save(sender, instance, signal, *args, **kwargs):
         data_dict = instance.model.__dict__
         data_dict.pop('_state')
 
-        filename = os.path.join('static', 'fake_data_{}.csv'.format(
+        filename = os.path.join(STATIC_URL, 'static', 'fake_data_{}.csv'.format(
             strftime("%Y_%m_%d_%H_%M_%S", gmtime())))
 
         gen_fake_data(data_dict, filename)
