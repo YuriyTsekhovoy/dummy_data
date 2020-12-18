@@ -1,6 +1,6 @@
 import os
 from django.db import models
-from django.db.models.signals import pre_save
+from django.db.models.signals import post_save
 from dummy_data_project.celery import generate
 from fake_data.fake_factory import FakeDataGen, gen_fake_data
 from dummy_data_project.storage_settings import STATIC_URL
@@ -13,7 +13,7 @@ class FakeDataModel(models.Model):
     file = models.FileField(null=True, blank=True, upload_to='files')
 
 
-def fakedata_pre_save(sender, instance, signal, *args, **kwargs):
+def fakedata_post_save(sender, instance, *args, **kwargs):
 
     if instance:
 
@@ -26,7 +26,7 @@ def fakedata_pre_save(sender, instance, signal, *args, **kwargs):
         gen_fake_data(data_dict, filename)
 
 
-pre_save.connect(fakedata_pre_save, sender=FakeDataModel)
+post_save.connect(fakedata_post_save, sender=FakeDataModel)
 
 
 class SchemaDataModel(models.Model):
