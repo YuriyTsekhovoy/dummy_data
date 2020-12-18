@@ -21,8 +21,8 @@ class FakeListView(generic.ListView):
 @method_decorator([login_required, ], name='dispatch')
 class SchemaCreateView(generic.CreateView):
     model = SchemaDataModel
-    fields = ['full_name', 'email', 'phone_number', 'company_name',
-              'text', 'integer', 'date', 'address', 'row_num']
+    fields = ['name', 'email', 'phone_number', 'company',
+              'text', 'random_int', 'date', 'address', 'row_num']
     template_name = "schema_create.html"
     success_url = "schema_list"
 
