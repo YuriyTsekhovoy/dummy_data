@@ -41,6 +41,6 @@ class GenerateDataView(generic.DetailView):
     template_name = "generator.html"
 
 
-class ShowDataView(generic.DetailView):
-
-    template_name = "data.html"
+class FakeDataView(generic.DetailView):
+    model = FakeDataModel
+    template_name = "fake_data_view.html"

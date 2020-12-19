@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="jumbotron text-center">
+    <div class="container">
+        <h1>You Can Download Dummy Data</h1>
+        <ul>
+            <h1>Fake Data: {{ object }}</h1>
+            <p>Fake Data.model: {{ object.model }}</p>
+            <p>URL: {{ object.url }}</p>
+        </ul>
+    </div>
+</div>
+{% endblock %}

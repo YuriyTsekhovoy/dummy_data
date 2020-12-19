@@ -1,38 +1,42 @@
 import os
 from django.db import models
-from django.db.models.signals import pre_save
+from django.db.models.signals import post_save
+from django.core.files import File
 from dummy_data_project.celery import generate
 from fake_data.fake_factory import FakeDataGen, gen_fake_data
 from dummy_data_project.storage_settings import STATIC_URL
+from dummy_data_project.settings import *
 # from dummy_data_project.settings import MEDIA_ROOT
 from time import gmtime, strftime
 
 
 class FakeDataModel(models.Model):
     model = models.ForeignKey('SchemaDataModel', on_delete=models.CASCADE)
-    file = models.FileField(null=True, blank=True, upload_to='files')
-    
-    # def save(self, *args, **kwargs):
-    #     super().save(*args, **kwargs)
+    url = models.URLField(null=True, blank=True, editable=False)
 
-    #     fake_file = self.file.url(self.file.path)
-    #     fake_file.save(self.file.path)
+    def save(self, *args, **kwargs):
+        filename = gen_filename()
+        s3_url = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{filename}"
+        self.url = s3_url
+        super().save(*args, **kwargs)
 
-def fakedata_pre_save(sender, instance, signal, *args, **kwargs):
 
+def gen_filename():
+    filename = os.path.join('static', 'files', 'fake_data_{}.csv'.format(
+        strftime("%Y_%m_%d_%H_%M_%S", gmtime())))
+    return filename
+
+
+def fakedata_post_save(sender, instance, signal, *args, **kwargs):
     if instance:
-
         data_dict = instance.model.__dict__
         data_dict.pop('_state')
 
-        filename = os.path.join('static', 'files', 'fake_data_{}.csv'.format(
-            strftime("%Y_%m_%d_%H_%M_%S", gmtime())))
-
+        filename = instance.url.split('https://dummy-d.s3.amazonaws.com/')[-1]
         gen_fake_data(data_dict, filename)
-        print(instance)
 
-        # instance.save()
-pre_save.connect(fakedata_pre_save, sender=FakeDataModel)
+
+post_save.connect(fakedata_post_save, sender=FakeDataModel)
 
 
 class SchemaDataModel(models.Model):
@@ -44,5 +48,4 @@ class SchemaDataModel(models.Model):
     random_int = models.BooleanField(null=False, default=True)
     date = models.BooleanField(null=False, default=True)
     address = models.BooleanField(null=False, default=True)
-
     row_num = models.IntegerField(null=False, default=True)
