@@ -3,7 +3,6 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.core.files import File
 from dummy_data_project.celery import generate
-from fake_data.fake_factory import gen_fake_data
 from dummy_data_project.storage_settings import STATIC_URL
 from dummy_data_project.settings import *
 from time import gmtime, strftime
@@ -36,7 +35,7 @@ def fakedata_post_save(sender, instance, signal, *args, **kwargs):
         data_dict.pop('_state')
         row_num = instance.row_num
         filename = instance.url.split('https://dummy-d.s3.amazonaws.com/')[-1]
-        gen_fake_data(data_dict, filename, row_num)
+        generate.delay(data_dict, filename, row_num)
 
 
 post_save.connect(fakedata_post_save, sender=FakeDataModel)

@@ -124,8 +124,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-# STATIC_URL = '/static/'
-
 LOGIN_REDIRECT_URL = 'data'
 LOGOUT_REDIRECT_URL = 'login'
 
@@ -133,6 +131,3 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 django_heroku.settings(locals())
-
-# DEFAULT_FILE_STORAGE = 'dummy_data_project.storage_backends.MediaStorage'
-# DATABASE_URL = env('DATABASE_URL')

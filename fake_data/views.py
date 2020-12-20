@@ -5,8 +5,6 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from fake_data.models import FakeDataModel, SchemaDataModel
-# from fake_data.forms import SchemaCreateForm, GeneratorForm
-# Create your views here.
 
 
 @method_decorator([login_required, ], name='dispatch')
