@@ -35,7 +35,7 @@ def fakedata_post_save(sender, instance, signal, *args, **kwargs):
         data_dict.pop('_state')
         row_num = instance.row_num
         filename = instance.url.split('https://dummy-d.s3.amazonaws.com/')[-1]
-        generate.delay(data_dict, filename, row_num)
+        generate(data_dict, filename, row_num)
 
 
 post_save.connect(fakedata_post_save, sender=FakeDataModel)
