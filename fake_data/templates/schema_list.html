@@ -3,14 +3,31 @@
 {% block content %}
 <div class="jumbotron text-center">
     <div class="container">
-        <h1>Schemas Saved</h1>
-        <ul>
-            {% for schema in object_list %}
-            <li>{{ schema }}</li>
-            <a href="{% url 'generate-data' pk=schema.pk %}" type="submit" class="btn btn-primary">Generate Data</a>
-            {% empty %}
-            {% endfor %}
-        </ul>
+        <h2>Data Schemas</h2>
+        <p>You can create fake data sets from the data schemas listed below</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Modified</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for schema in object_list %}
+                <tr>
+                    <td>{{ schema.id }}</td>
+                    <td>{{ schema.title }}</td>
+                    <td>{{ schema.modified }}</td>
+                    <td>
+                        <a href="{% url 'generate-data' pk=schema.pk %}" type="submit" class="btn btn-primary">Create Data Sets</a>
+                    </td>
+                </tr>
+                {% empty %}
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}

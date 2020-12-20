@@ -8,7 +8,6 @@ from fake_data.models import (FakeDataModel, SchemaDataModel)
 class FakeDataModelAdmin(admin.ModelAdmin):
     class Meta:
         model = FakeDataModel
-        fields = ['model', ]
 
 
 class SchemaDataModelAdmin(admin.ModelAdmin):

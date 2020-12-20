@@ -1,7 +1,8 @@
 import celery
 from fake_data.fake_factory import gen_fake_data
-app = celery.Celery('dummy_data_project')
 
+app = celery.Celery('dummy_data_project')
+app.autodiscover_tasks()
 
 @app.task
 def generate(*args, **kwargs):

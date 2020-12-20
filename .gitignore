@@ -5,7 +5,8 @@
 commands.txt
 
 # static
-# static/
+static/
+staticfiles/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

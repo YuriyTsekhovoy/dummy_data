@@ -5,7 +5,9 @@
     <div class="container">
         <h1>Getting Started with Fake CSV Data</h1>
         <p>This is a simple application. It can help you to generate fake data for testing your apps.</p>
-       
+        <form method="get" action="{% url 'schema-create' %}">
+            <button class="btn btn-success" type="submit">Create Schema</button>
+        </form>
     </div>
 </div>
 {% endblock %}

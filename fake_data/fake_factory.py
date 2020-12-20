@@ -6,16 +6,12 @@ from django.core.files import File
 from dummy_data_project.settings import *
 
 
-class FakeDataGen():
-    pass
-
-
-def gen_fake_data(data, filename):
+def gen_fake_data(data, filename, row_num):
     fake = Faker()
-    row_num = int(data['row_num'])
     id = data['id']
-    data.pop('row_num')
     data.pop('id')
+    data.pop('title')
+    data.pop('modified')
     rows = []
     for _ in range(row_num):
         field = []
@@ -34,10 +30,7 @@ def gen_fake_data(data, filename):
         csvwriter.writerow(field)
         csvwriter.writerows(rows)
 
-    s3 = boto3.resource('s3')
-    data = open(filename, 'rb')
-    try:
-        s3.Bucket(AWS_STORAGE_BUCKET_NAME).put_object(Key=filename, Body=data)
-    except Exception as e:
-        raise IOError(e)
-
+    s3_client = boto3.client('s3')
+    with open(filename, "rb") as f:
+        s3_client.upload_fileobj(f, AWS_STORAGE_BUCKET_NAME,
+                                 filename, ExtraArgs={'ACL': 'public-read'})

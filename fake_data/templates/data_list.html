@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="jumbotron text-center">
+    <div class="container">
+        <h1>Now you can download Fake CSV Data</h1>
+        <p>Your fake data</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Created</th>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in object_list %}
+                <tr>
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.model.modified }}</td>
+                    <td>{{ data.model.title }}</td>
+                    <td>
+                        {% if data.url is not False %}
+                        Ready
+                        {% else %}
+                        Processing
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if data.url is not False %}
+                        <form method="get" action="{{ data.url }}">
+                            <button class="btn btn-success" type="submit">Download</button>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="jumbotron text-center">
+    <div class="container">
+        <h1>Your Fake CSV Data schema</h1>
+        <p>Your data schema</p>
+        <p>
+            {{object}}
+        </p>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>URL</th>
+                <th>Schema Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+            <tr>
+                <td>{{ object.id }}</td>
+                <td>{{ object.url }}</td>
+                <td>{{ object.model.name }}</td>
+            </tr>
+            {% empty %}
+            {% endfor %}
+        </tbody>
+    </div>
+</div>
+{% endblock %}
