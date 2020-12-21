@@ -19,9 +19,6 @@ class FakeDataModel(models.Model):
         self.url = url
         super().save(*args, **kwargs)
 
-    def __str__(self):
-        return '{}, {} items'.format(self.model.title, str(self.row_num))
-
 
 def gen_filename():
     filename = os.path.join('static', 'files', 'fake_data_{}.csv'.format(
@@ -52,6 +49,3 @@ class SchemaDataModel(models.Model):
     random_int = models.BooleanField(null=False, default=True)
     date = models.BooleanField(null=False, default=True)
     address = models.BooleanField(null=False, default=True)
-
-    def __str__(self):
-        return '{}'.format(self.title)
