@@ -20,7 +20,7 @@ class FakeDataModel(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.model.title + ', ' + str(self.row_num) + ' items'
+        return '{}, {} items'.format(self.model.title, str(self.row_num))
 
 
 def gen_filename():
@@ -54,4 +54,4 @@ class SchemaDataModel(models.Model):
     address = models.BooleanField(null=False, default=True)
 
     def __str__(self):
-        return self.title
+        return '{}'.format(self.title)
